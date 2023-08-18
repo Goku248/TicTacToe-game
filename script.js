@@ -36,6 +36,7 @@ const checkWin = ()=>{
 
 // Game Logic
 // music.play()
+let count =0;
 let boxes = document.getElementsByClassName("box");
 Array.from(boxes).forEach(element =>{
     let boxtext = element.querySelector('.boxtext');
@@ -46,9 +47,14 @@ Array.from(boxes).forEach(element =>{
             audioTurn.play();
             checkWin();
             if (!isgameover){
+                count++;
                 document.getElementsByClassName("info")[0].innerText  = "Turn for " + turn;
+                if (count == 9) {
+                    document.getElementsByClassName("info")[0].innerText  = "It's a Draw";
+                }
             }
         }
+
     })
 })
 
@@ -59,7 +65,8 @@ reset.addEventListener('click', ()=>{
         element.innerText = ""
     });
     turn = "X";
-    isgameover = false
+    isgameover = false;
+    count = 0;
     document.querySelector(".line").style.width = "0vw";
     document.getElementsByClassName("info")[0].innerText  = "Turn for " + turn;
     document.querySelector('.imgbox').getElementsByTagName('img')[0].style.width = "0px"
